@@ -60,7 +60,7 @@ window.dome = (function () {
       } else {
         els = [selector];
       }
-      return new Dome(els)
+      return new Dome(els);
     }
 
   };
