@@ -50,6 +50,45 @@ window.dome = (function () {
     }
   };
 
+  Dome.prototype.addClass = function (classes) {
+    var className = "",
+        max = classes.length;
+    if (typeof classes !== "string") {
+      for (var i = 0; i < max; i++) {
+        className += " " + classes[i];
+      }
+    } else {
+      className = " " + classes;
+    }
+
+    return this.forEach(function (el) {
+      el.className += className;
+    });
+  };
+
+  Dome.prototype.removeClass = function (klass) {
+    return this.forEach(function (el) {
+      var cs = el.className.split(" "),
+          i;
+
+      while ( (i = cs.indexOf(klass)) > -1) {
+        cs = cs.slice(0, i).concat(cs.slice(++i));
+      }
+      el.className = cs.join(" ");
+    });
+  };
+
+  if (typeof Array.prototype.indexOf !== "function") {
+    Array.prototype.indexOf = function(item) {
+      for (var i = 0, max = this.length; i < max; i++) {
+        if (this[i] === item) {
+          return i;
+        }
+      }
+      return -1;
+    };
+  }
+  
   var dome = {
     get: function (selector) {
       var els;
